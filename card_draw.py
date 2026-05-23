@@ -1,15 +1,33 @@
 # Intentionally flawed Python program
 
-# importing modules
-import itertools, random
+import itertools
+import random
 
-# make a deck of cards
-deck = list(itertools.product(range(1,14),['Spade','Heart','Diamond','Club'])
+RANKS = list(range(1, 14))
+SUITS = ["Spade", "Heart", "Diamond", "Club"]
 
-# shuffle the cards
-random.shuffle(deck)
 
-# draw five cards
-print("You got:")
-for i in range(5)
-   print(deck[i][0], "of", deck[i][1]
+def format_rank(rank):
+    rank_names = {1: "Ace", 11: "Jack", 12: "Queen", 13: "King"}
+    return rank_names.get(rank, str(rank))
+
+
+def build_deck():
+    return list(itertools.product(RANKS, SUITS))
+
+
+def draw_cards(deck, count=5):
+    return deck[:count]
+
+
+def main():
+    deck = build_deck()
+    random.shuffle(deck)
+
+    print("You got:")
+    for rank, suit in draw_cards(deck, 5):
+        print(f"{format_rank(rank)} of {suit}")
+
+
+if __name__ == "__main__":
+    main()
